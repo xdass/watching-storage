@@ -34,7 +34,7 @@
                 </thead>
                 <tbody>
                     {% for visit in this_passcard_visits %}
-                    <tr>
+                    <tr {% if visit.is_strange %} style="background-color: #f9bbbb" {% endif %}>
                         <td class="table-element">{{ forloop.counter }}</td>
                             <td class="table-element"><strong>{{ visit.entered_at }}</strong></td>
                         <td class="table-element">{{ visit.duration }}</td>
