@@ -1,17 +1,20 @@
 import os
 
 from dotenv import load_dotenv
+from environs import Env
+
+env = Env()
 
 load_dotenv()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': os.getenv('HOST'),
-        'PORT': os.getenv('PORT'),
-        'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
-        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': env('HOST'),
+        'PORT': env('PORT'),
+        'NAME': env('NAME'),
+        'USER': env('USER'),
+        'PASSWORD': env('PASSWORD'),
     }
 }
 
@@ -19,11 +22,11 @@ INSTALLED_APPS = ['datacenter']
 
 SECRET_KEY = 'REPLACE_ME'
 
-DEBUG = os.getenv('DEBUG')
+DEBUG = env.bool('DEBUG', False)
 
 ROOT_URLCONF = "project.urls"
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
